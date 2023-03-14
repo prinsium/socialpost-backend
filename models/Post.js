@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const filter = require("../util/filter");
+const filter = require("../utils/filter");
 const PostLike = require("./PostLike");
 
 const PostSchema = new mongoose.Schema(

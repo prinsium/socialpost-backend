@@ -1,22 +1,38 @@
-var jwt = require('jsonwebtoken');
-const JWT_SECRET="primus@b6m$pr";
+const jwt = require("jsonwebtoken");
+const verifyToken = (req, res, next) => {
+  try {
+    const token = req.headers["x-access-token"];
 
-const verifyToken= (req, res, next)=>{
-    //getting user from JWT token and adding user id to req object
-    const token = req.header('auth-token');
-    if(!token){
-        res.status(401).send({error: "invalid token"});
+    if (!token) {
+      throw new Error("No token provided");
     }
+    const { userId, isAdmin } = jwt.decode(token, process.env.TOKEN_KEY);
 
-    try {
-      const data= jwt.verify(token, JWT_SECRET);
-      req.user= data.user;  
-      next();
-    } catch (error) {
-        res.status(401).send({error: "invalid token"}); 
-    }
+    req.body = {
+      ...req.body,
+      userId,
+      isAdmin,
+    };
 
-}
+    return next();
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+};
 
+const optionallyVerifyToken = (req, res, next) => {
+  try {
+    const token = req.headers["x-access-token"];
 
-module.exports = verifyToken;
+    if (!token) return next();
+
+    const decoded = jwt.decode(token, process.env.TOKEN_KEY);
+    req.body.userId = decoded.userId;
+
+    next();
+  } catch (err) {
+    return next();
+  }
+};
+
+module.exports = { verifyToken, optionallyVerifyToken };
