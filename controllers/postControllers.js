@@ -3,7 +3,7 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 const Comment = require("../models/Comment");
 const PostLike = require("../models/PostLike");
-const paginate = require("../util/paginate");
+const paginate = require("../utils/paginate");
 const cooldown = new Set();
 
 const createPost = async (req, res) => {
