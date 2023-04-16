@@ -6,9 +6,10 @@ const PostLike = require("../models/PostLike");
 const paginate = require("../utils/paginate");
 const cooldown = new Set();
 
+
 const createPost = async (req, res) => {
   try {
-    const { title, content, userId } = req.body;
+    const {title, content, userId } = req.body;
 
     if (!(title && content)) {
       throw new Error("All input required");
@@ -67,7 +68,7 @@ const getPost = async (req, res) => {
 const updatePost = async (req, res) => {
   try {
     const postId = req.params.id;
-    const { content, userId, isAdmin } = req.body;
+    const { title, content, userId, isAdmin } = req.body;
 
     const post = await Post.findById(postId);
 
@@ -79,6 +80,7 @@ const updatePost = async (req, res) => {
       throw new Error("Not authorized to update post");
     }
 
+    post.title = title;
     post.content = content;
     post.edited = true;
 
