@@ -12,7 +12,7 @@ const PostSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      maxLength: [80, "Must be no more than 80 characters"],
+      maxLength: [200, "Must be no more than 200 characters"],
     },
     content: {
       type: String,

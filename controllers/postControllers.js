@@ -24,7 +24,7 @@ const createPost = async (req, res) => {
     cooldown.add(userId);
     setTimeout(() => {
       cooldown.delete(userId);
-    }, 60000);
+    }, 6000);
 
     const post = await Post.create({
       title,
