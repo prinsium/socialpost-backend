@@ -3,7 +3,6 @@ require('dotenv').config()
 connectToMongo();
 var bodyParser = require("body-parser");
 var cors = require('cors') 
-// const formidableMiddleware = require('express-formidable');
 
 const express = require('express')
 const app = express()
