@@ -1,6 +1,5 @@
-# socialpost-backend
-backend for social media web app, built with MERN
 # Installation and usage
+create a folder named 'socialpost' and under that folder
 1. Clone this repository (also frontend --> https://github.com/3vdi/socialpost-frontend.git )
 ```
 git clone https://github.com/3vdi/socialpost-backend.git
